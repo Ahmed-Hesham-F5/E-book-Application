@@ -23,20 +23,20 @@ import javax.swing.table.DefaultTableModel;
 public class publisher_phones_form extends JPanel implements ActionListener {
 
     //publisher phones
-    JLabel p4_l1 = new JLabel("Publisher ID");
-    JTextField p4_t1 = new JTextField();
-    JLabel p4_l2 = new JLabel("phone");
-    JTextField p4_t2 = new JTextField();
+    JLabel Publisher_ID_label = new JLabel("Publisher ID");
+    JTextField Publisher_ID_text = new JTextField();
+    JLabel phone_lable = new JLabel("phone");
+    JTextField phone_text = new JTextField();
 
-    JButton p4_b1 = new JButton("Add");
-    JButton p4_b2 = new JButton("Delete");
-    JButton p4_b3 = new JButton("Update");
-    JButton p4_b4 = new JButton("Show all");
+    JButton Add_btn = new JButton("Add");
+    JButton Delete_btn = new JButton("Delete");
+    JButton Update_btn = new JButton("Update");
+    JButton Show_all_btn = new JButton("Show all");
 
-    JTable p4_table;
-    JScrollPane p4_scroll;
+    JTable table;
+    JScrollPane scroll;
 
-    DefaultTableModel t4;
+    DefaultTableModel TableModel;
     application application;
 
     public publisher_phones_form(application _application) {
@@ -48,26 +48,26 @@ public class publisher_phones_form extends JPanel implements ActionListener {
        application. parentpanel.add(this);
         this.setLayout(null);
         
-        p4_l1.setBounds(40,10, 100 , 30);this.add(p4_l1);
-        p4_t1.setBounds(30,40, 100 , 30);this.add(p4_t1);
+        Publisher_ID_label.setBounds(40,10, 100 , 30);this.add(Publisher_ID_label);
+        Publisher_ID_text.setBounds(30,40, 100 , 30);this.add(Publisher_ID_text);
     
-        p4_l2.setBounds(170,10, 100 , 30);this.add(p4_l2);
-        p4_t2.setBounds(150,40, 100 , 30);this.add(p4_t2);
+        phone_lable.setBounds(170,10, 100 , 30);this.add(phone_lable);
+        phone_text.setBounds(150,40, 100 , 30);this.add(phone_text);
         
-        p4_b1.setBounds(500, 40, 80 ,30); this.add(p4_b1);p4_b1.addActionListener(this);
-        p4_b3.setBounds(590, 40, 80 ,30); this.add(p4_b3);p4_b3.addActionListener(this);
-        p4_b2.setBounds(680, 40, 80 ,30); this.add(p4_b2);p4_b2.addActionListener(this);
-        p4_b4.setBounds(770, 40, 100 ,30); this.add(p4_b4);p4_b4.addActionListener(this);
+        Add_btn.setBounds(500, 40, 80 ,30); this.add(Add_btn);Add_btn.addActionListener(this);
+        Update_btn.setBounds(590, 40, 80 ,30); this.add(Update_btn);Update_btn.addActionListener(this);
+        Delete_btn.setBounds(680, 40, 80 ,30); this.add(Delete_btn);Delete_btn.addActionListener(this);
+        Show_all_btn.setBounds(770, 40, 100 ,30); this.add(Show_all_btn);Show_all_btn.addActionListener(this);
         
                         String [][] publishers_phone = { 
        
         };
         String[] pheader_phone={"publisher ID","phone"}; 
-        t4 = new DefaultTableModel (publishers_phone,pheader_phone);
-        p4_table = new JTable(t4);
-        p4_scroll =new JScrollPane(p4_table);    
-        this.add(p4_scroll);
-        p4_scroll.setBounds(30, 100, 700, 900);
+        TableModel = new DefaultTableModel (publishers_phone,pheader_phone);
+        table = new JTable(TableModel);
+        scroll =new JScrollPane(table);    
+        this.add(scroll);
+        scroll.setBounds(30, 100, 700, 900);
     }
 
     @Override
@@ -76,8 +76,8 @@ public class publisher_phones_form extends JPanel implements ActionListener {
          String text2;
       
        ////////////////////////////////publishers phones ////////////////////////////////////////////////////////////////
-   if(e.getSource()==p4_b1){
-          if (p4_t1.getText().equals("")||p4_t2.getText().equals("")){
+   if(e.getSource()==Add_btn){
+          if (Publisher_ID_text.getText().equals("")||phone_text.getText().equals("")){
           
             JOptionPane.showMessageDialog(this, "please enter all data");
           
@@ -85,16 +85,16 @@ public class publisher_phones_form extends JPanel implements ActionListener {
           else{
           try {
               
-          text1= p4_t1.getText();
-          text2= p4_t2.getText();          
+          text1= Publisher_ID_text.getText();
+          text2= phone_text.getText();          
          query = "insert into publisher_phones values(N'"+text1+"',N'"+text2+"')";
         
               ss.executeUpdate(query);
               
               JOptionPane.showMessageDialog(this, "Data added successfully");
               
-                  p4_t1.setText("");
-                  p4_t2.setText("");
+                  Publisher_ID_text.setText("");
+                  phone_text.setText("");
          
               
             } catch (SQLException ex) {
@@ -105,9 +105,9 @@ public class publisher_phones_form extends JPanel implements ActionListener {
         
         }
         //update
-        if(e.getSource()==p4_b3){
+        if(e.getSource()==Update_btn){
         
-         if (p4_t2.getText().equals("")){
+         if (phone_text.getText().equals("")){
           
             JOptionPane.showMessageDialog(this, "please enter all data");
           
@@ -115,8 +115,8 @@ public class publisher_phones_form extends JPanel implements ActionListener {
           else{
           try {
               
-          text1= p4_t1.getText();
-          text2= p4_t2.getText();
+          text1= Publisher_ID_text.getText();
+          text2= phone_text.getText();
 
                      
          query = "update publisher_phones set publisher_id = N'"+text1+"' where phone = N'"+text2+"'";
@@ -125,8 +125,8 @@ public class publisher_phones_form extends JPanel implements ActionListener {
               
               JOptionPane.showMessageDialog(this, "Data Updated successfully");
               
-                  p4_t1.setText("");
-                  p4_t2.setText("");
+                  Publisher_ID_text.setText("");
+                  phone_text.setText("");
 
               
             } catch (SQLException ex) {
@@ -138,9 +138,9 @@ public class publisher_phones_form extends JPanel implements ActionListener {
         
         
         //delete
-         if(e.getSource()==p4_b2){
+         if(e.getSource()==Delete_btn){
         
-         if (p4_t2.getText().equals("")){
+         if (phone_text.getText().equals("")){
           
             JOptionPane.showMessageDialog(this, "please enter phone");
           
@@ -148,7 +148,7 @@ public class publisher_phones_form extends JPanel implements ActionListener {
           else{
           try {
               
-          text1= p4_t2.getText();
+          text1= phone_text.getText();
           
          query = "delete from publisher_phones where phone = N'"+text1+"'";
         
@@ -156,8 +156,8 @@ public class publisher_phones_form extends JPanel implements ActionListener {
               
               JOptionPane.showMessageDialog(this, "Data deleted successfully");
               
-                  p4_t1.setText("");
-                  p4_t2.setText("");
+                  Publisher_ID_text.setText("");
+                  phone_text.setText("");
 
             } catch (SQLException ex) {
                      JOptionPane.showMessageDialog(this, ex);
@@ -168,7 +168,7 @@ public class publisher_phones_form extends JPanel implements ActionListener {
         
         
         //show on table
-             if(e.getSource()==p4_b4){
+             if(e.getSource()==Show_all_btn){
                  
           try {
               
@@ -179,14 +179,14 @@ public class publisher_phones_form extends JPanel implements ActionListener {
                    
                    
                
-               t4.setRowCount(0);
+               TableModel.setRowCount(0);
               while(rs.next()){
               
                 String publisher_id = rs.getString("publisher_id");  
                 String phone = rs.getString("phone");  
                 String data [] = {publisher_id ,phone};
                
-                 t4.addRow(data);
+                 TableModel.addRow(data);
               }
               
               JOptionPane.showMessageDialog(this, "Data imported sucssfully");
